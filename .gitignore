@@ -1,0 +1,12 @@
+# Segredos — nunca commitar
+firebase-*.json
+*-service-account*.json
+.env
+# Build / IDE
+target/
+build/
+.dart_tool/
+.idea/
+.vscode/
+*.iml
+*.log
