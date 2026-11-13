@@ -10,6 +10,7 @@ Autores: Áquila Matheus de Oliveira (BP3054306) e Eduardo Schoof (BP3060357).
 |---|---|
 | `backend/` | API REST em Spring Boot 3.5 / Java 21 (JWT, JPA, WebSocket, Swagger, FCM) |
 | `app/` | Aplicativo Flutter/Dart (Provider, go_router, camada de rede, push, câmera/galeria, GPS) |
+| `banco/` | Scripts MySQL: `criar-usuario.sql` (cria o banco e o usuário) e `schema.sql` (tabelas, versão manual) |
 | `backend/postman/` | Coleção Postman (61 requisições com testes automáticos) |
 | `backend/docs/` | `API.md` (especificação), `MODELO.md` (modelo de dados) e `mysql/schema.sql` |
 
@@ -38,14 +39,14 @@ docker compose up --build
 MySQL em `localhost:3306` e API em http://localhost:8080. Pule para o passo 3.
 
 **B) MySQL instalado**
-Abra o MySQL (Workbench ou terminal) como root e rode:
+Abra o MySQL (Workbench ou terminal) como root e rode o script `banco/criar-usuario.sql` (`mysql -u root -p < banco/criar-usuario.sql`), que executa:
 ```sql
 CREATE DATABASE IF NOT EXISTS doa CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 CREATE USER IF NOT EXISTS 'doa'@'%' IDENTIFIED BY 'doa';
 GRANT ALL PRIVILEGES ON doa.* TO 'doa'@'%';
 FLUSH PRIVILEGES;
 ```
-As tabelas são criadas pela API na primeira execução. O script `backend/docs/mysql/schema.sql` é a versão manual (use `DDL_AUTO=validate` se criar à mão).
+As tabelas são criadas pela API na primeira execução. O script `banco/schema.sql` é a versão manual (use `DDL_AUTO=validate` se criar as tabelas à mão).
 
 **C) Sem MySQL (teste rápido)**
 Não configure nada: a API usa H2 em memória, que zera a cada reinício.
